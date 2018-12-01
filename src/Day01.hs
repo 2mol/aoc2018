@@ -3,10 +3,10 @@ module Day01 where
 main = do
     input <- readFile "day01input"
     let drifts = map signedRead (lines input)
-    putStrLn $ "part 1: " <> show (sum drifts)
+    putStrLn $ "part 1: \n" <> show (sum drifts)
 
     let drifts' = drifts <> drifts'
-        bla = undefined
+        freqs = scanl (+) 0 drifts'
 
     putStrLn $ "part 2: "
 
