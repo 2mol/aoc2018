@@ -1,5 +1,7 @@
 module Main where
 
+import qualified Day01
+
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  Day01.main
