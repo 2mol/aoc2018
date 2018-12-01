@@ -1,0 +1,28 @@
+name:                aoc2018
+version:             0.1.0.0
+github:              "2mol/aoc2018"
+license:             BSD3
+author:              "Juri Chomé"
+maintainer:          "juri.chome@gmail.com"
+copyright:           "2019 Juri Chomé"
+
+extra-source-files:
+- README.md
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  aoc2018-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aoc2018
+
