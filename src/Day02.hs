@@ -1,3 +1,5 @@
+{-# LANGUAGE MultiWayIf #-}
+
 module Day02 where
 
 import Data.Function ((&))
@@ -26,3 +28,11 @@ aggregate (twos, threes) counts =
     ( twos   + (if 2 `elem` counts then 1 else 0)
     , threes + (if 3 `elem` counts then 1 else 0)
     )
+
+--
+
+diffAtMostOne c "" "" = c > 1
+diffAtMostOne c (s1:s1') (s2:s2') =
+    if | c > 1 -> False
+       | s1 == s2 -> diffAtMostOne c s1' s2'
+       | s1 /= s2 -> diffAtMostOne (c+1) s1' s2'
