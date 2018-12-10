@@ -8,7 +8,20 @@ import Data.Char (isUpper, isLower, toUpper, toLower)
 main = do
     input : _ <- lines <$> readFile "day05input"
 
-    print $ length $ fullReduce input
+    -- print $ length $ fullReduce input
+    let
+        charEq c1 c2 = toLower c1 /= toLower c2
+
+        filterChar str c = filter (charEq c) str
+
+        variants =
+            map (filterChar input) ['a'..'z']
+
+        smallest =
+            map (length . fullReduce) variants
+                & minimum
+
+    print smallest
 
 findNeighbours :: Int -> Int -> String -> [Int]
 findNeighbours idx _ [ ] = []
