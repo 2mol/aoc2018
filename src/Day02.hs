@@ -10,11 +10,17 @@ main = do
     input <- lines <$> readFile "day02input"
 
     let
-        (c2, c3) =
-            map sameCounts input
-                & foldl aggregate (0, 0)
+        comb = [ (s1, s2, diffAtMostOne 0 s1 s2) | s1 <- input, s2 <- input, s1 /= s2]
 
-    print (c2 * c3)
+        matches = filter (\(_, _, m) -> m) comb
+
+        (m1, m2, _) = matches !! 0
+
+        trimmed = trim m1 m2
+
+    print $ matches !! 0
+    print trimmed
+    print "yay"
 
 count :: Ord a => M.Map a Int -> a -> M.Map a Int
 count dict el = M.insertWith (+) el 1 dict
@@ -31,8 +37,17 @@ aggregate (twos, threes) counts =
 
 --
 
-diffAtMostOne c "" "" = c > 1
+diffAtMostOne c "" "" = c <= 1
+-- diffAtMostOne c "" _ = False
+-- diffAtMostOne c _ "" = False
 diffAtMostOne c (s1:s1') (s2:s2') =
     if | c > 1 -> False
        | s1 == s2 -> diffAtMostOne c s1' s2'
        | s1 /= s2 -> diffAtMostOne (c+1) s1' s2'
+
+trim s1 "" = s1
+trim "" s2 = s2
+trim (s1:s1') (s2:s2') =
+    if s1 == s2
+        then s1 : (trim s1' s2')
+        else trim s1' s2'
