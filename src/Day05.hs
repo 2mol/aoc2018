@@ -4,18 +4,18 @@ module Day05 where
 
 import Data.Function ((&))
 import Data.Char (isUpper, isLower, toUpper, toLower)
-import Data.Time.Clock (diffUTCTime, getCurrentTime)
+import qualified Data.Time.Clock as Time
 
 main = do
     input : _ <- lines <$> readFile "day05input"
 
-    t1 <- getCurrentTime
+    t1 <- Time.getCurrentTime
     -- print t1
 
     print $ length $ fullReduce input
 
-    t2 <- getCurrentTime
-    print $ diffUTCTime t2 t1
+    t2 <- Time.getCurrentTime
+    print $ Time.diffUTCTime t2 t1
 
     let
         charEq c1 c2 = toLower c1 /= toLower c2
@@ -31,8 +31,8 @@ main = do
 
     print smallest
 
-    t3 <- getCurrentTime
-    print $ diffUTCTime t3 t2
+    t3 <- Time.getCurrentTime
+    print $ Time.diffUTCTime t3 t2
     -- print "huzza"
 
 findNeighbours :: Int -> Int -> String -> [Int]
